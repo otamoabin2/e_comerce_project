@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 import requests
-# from cart.forms import CartAddProductForm
+from cart.forms import CartAddProductForm
 
 from .forms import *
 from .models import *
@@ -47,13 +47,15 @@ def product_list(request, category_slug=None):
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    # cart_product_form = CartAddProductForm()
+    product = get_object_or_404(Product, id=id,
+                                         slug=slug,
+                                         available=True)
+    cart_product_form = CartAddProductForm()
+    return render(request,
+                  'shop/product/detail.html',
+                  {'product': product,
+                   'cart_product_form': cart_product_form})
 
-    return render(
-        request,
-        "shop/product/detail.html",
-        {"product": product,},
-    )
 
 
 def generate_pictures(category_slug):
