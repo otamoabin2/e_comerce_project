@@ -8,7 +8,7 @@ from .forms import *
 from .models import *
 
 pix_url = "https://pixabay.com/api/?key=17560993-1dca8c47b9291ed16f15f4a9b&q=impressions&image_type=paintings"
-  
+
 
 def product_list(request, category_slug=None):
     category = None
@@ -20,11 +20,11 @@ def product_list(request, category_slug=None):
         for key in dic:
             if key == "webformatURL":
                 photo_display.append(dic[key])
-            if key =="tags":
+            if key == "tags":
                 photo_description.append(dic[key])
 
     categories = Category.objects.all()
-   
+
     products = Product.objects.filter(available=True)
 
     if category_slug:
@@ -33,14 +33,13 @@ def product_list(request, category_slug=None):
     photo_display = photo_display[:len(products)]
     photo_description = photo_description[:len(products)]
 
-    
     context = {
         "category": category,
         "categories": categories,
         "products": products,
         "photo_display": photo_display,
-        'photo_description':photo_description
-        
+        'photo_description': photo_description
+
     }
     return render(request, "shop/product/list.html", context)
 
@@ -48,14 +47,13 @@ def product_list(request, category_slug=None):
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     product = get_object_or_404(Product, id=id,
-                                         slug=slug,
-                                         available=True)
+                                slug=slug,
+                                available=True)
     cart_product_form = CartAddProductForm()
     return render(request,
                   'shop/product/detail.html',
                   {'product': product,
                    'cart_product_form': cart_product_form})
-
 
 
 def generate_pictures(category_slug):
@@ -74,11 +72,8 @@ class CreateAccount(CreateView):
 
     def form_valid(self, form):
         view = super(CreateAccount, self).form_valid(form)
-        username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
+        username, password = form.cleaned_data.get(
+                'username'), form.cleaned_data.get('password1')
         user = authenticate(username=username, password=password)
         login(self.request, user)
         return view
-    
-    
-    
-    

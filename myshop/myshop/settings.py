@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # "allauth.account",
     # "allauth.socialaccount",
     "orders.apps.OrdersConfig",
+    # 'payments.apps.OrdersConfig"'
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 CART_SESSION_ID = "cart"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
 
 # django allauth
 
