@@ -18,7 +18,8 @@ def order_create(request):
             cart.clear()
             
             # launch asynchronous task
-            # order_created.delay(order.id)
+           
+           
             request.session['order_id'] = order.id
             return redirect(reverse('payment:processing'))
           

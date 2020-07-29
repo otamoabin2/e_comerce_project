@@ -67,7 +67,7 @@ def about_us(request):
 
 class CreateAccount(CreateView):
     form_class = CreateAccountForm
-    success_url = reverse_lazy('base:home')
+    success_url = reverse_lazy('create_account')
     template_name = 'registration/create_account.html'
 
     def form_valid(self, form):
